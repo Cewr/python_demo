@@ -1,0 +1,16 @@
+<p>
+    <!-- 
+        生成一个 URL，该 URL 与 demo_app/urls.py 中定义的名为 index 的 URL 模式匹配
+        demo_app 是一个命名空间，而 index 是该命名空间中一个名称独特的 URL 模式
+    -->
+    <a href="{% url 'demo_app:index' %}">index</a>
+
+    &nbsp;|&nbsp;
+
+    <a href="{% url 'demo_app:topics' %}">Topics</a>
+</p>
+
+<hr/>
+
+<!-- 一对块标签，块名 content，是个占位符，其包含信息将由子模板指定 -->
+{% block content %}{% endblock content %}

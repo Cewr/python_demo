@@ -1,0 +1,49 @@
+{% extends 'demo_app/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<p>主题</p>
+<ul>
+    {% for item in ls %}
+    <li>
+        <!-- <a href="/topics/{{ item.id }}/">
+            {{ item }}
+        </a> -->
+        <a href="{% url 'demo_app:topics_item' item.id %}">
+            {{ item }}
+        </a>
+    </li>
+    {% empty %}
+    <!-- 遍历数据为空显示内容 -->
+    <li>No topics have been added yet.</li>
+    {% endfor %}
+    <!-- 用于显式指出for循环的结束位置 -->
+
+</ul>
+<a style="margin-left: 350px;" href="{% url 'demo_app:new_topic' %}">add a new topic</a>
+
+<hr />
+
+{% if topic %}  
+    <div>
+        <p>详情 —— <b>{{ topic }}</b></p>
+        <ul>
+            {% for entry in entries %}
+            <li>
+                <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
+                <p>{{ entry.text|linebreaks }}</p>
+
+                <a style="margin-left: 30px;" href="{% url 'demo_app:edit_entry' entry.id %}">edit entry</a>
+            </li>
+            {% empty %}
+            <li>
+                There are no entrys for this topic yet.
+            </li>
+            {% endfor %}
+        </ul>
+
+        <a style="margin-left: 350px;" href="{% url 'demo_app:new_entry' topic.id %}">add a new entries</a>
+    </div>
+{% endif %}
+
+{% endblock content %}
