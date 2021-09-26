@@ -8,6 +8,24 @@
     &nbsp;|&nbsp;
 
     <a href="{% url 'demo_app:topics' %}">Topics</a>
+
+    <span style="padding-left: 320px"></span>
+
+    {% if user.is_authenticated %}
+        hello, {{ user.username }}
+
+        &nbsp;-&nbsp;
+
+        <a href="{% url 'users:logout' %}">logout</a>   
+    {% else %}
+        <a href="{% url 'users:register' %}">register</a> 
+        &nbsp;|&nbsp;
+        <a href="{% url 'users:login' %}">login</a> 
+    {% endif %}
+
+
+
+
 </p>
 
 <hr/>

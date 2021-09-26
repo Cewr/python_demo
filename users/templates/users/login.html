@@ -1,0 +1,16 @@
+{% extends 'demo_app/base.html' %}
+
+{% block content %}
+    {% if form.errors %}
+    <p>yor username and password didn't match. please try again.</p>
+    {% endif %}
+
+    <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">login</button>
+        <input type='hidden' name="next" value="{% url 'demo_app:index' %}"/>
+    </form>
+
+{% endblock content %}
