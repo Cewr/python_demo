@@ -4,6 +4,7 @@ from . models import Topic, Entry
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from . forms import TopicForm, EntryForm
 
@@ -15,6 +16,8 @@ def index(request):
     return render(request, 'demo_app/index.html')
 
 
+# @login_required(login_url='/users/login/')
+@login_required
 def topics(request):
     """显示所有的主题"""
     ls = Topic.objects.order_by('date_added')
