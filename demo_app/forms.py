@@ -14,4 +14,4 @@ class EntryForm(forms.ModelForm):
         model = Entry
         fields = ['text']
         labels = {'text': '条目'}
-        widgets = {'text': forms.Textarea(attrs={'color': 80})}
+        widgets = {'text': forms.Textarea(attrs={'cols': 80})}
