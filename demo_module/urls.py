@@ -20,6 +20,7 @@ from django.contrib import admin
 urlpatterns = [     # 包含项目中的应用程序的 URL
     url(r'^admin/', admin.site.urls),   # 定义了可在管理网站中请求的所有 URL
     url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^service/', include('service.urls', namespace='service')),
 
     url(r'', include('demo_app.urls', namespace='demo_app')),   # 添加 demo_app 的 URL
     # url(r'', include(urls)),
