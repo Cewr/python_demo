@@ -1,9 +1,11 @@
+from multiprocessing.dummy import Process
 from django.http import JsonResponse
 from . models import Chess
 from .serializers import Slll
 import json
 
 import asyncio
+import threading
 import websockets
 
 
@@ -32,11 +34,13 @@ def chess(request):
             'message': 'success'
         }
 
-    result = {
+    def result(method, rules):
+        return rules[method]() if rules.get(method) else {'message': "Request method '{}' does not exist".format(method)}
+
+    return JsonResponse(data=result(method, {
         'GET': get,
         'POST': post
-    }[method]() or {'message': 'error'}
-    return JsonResponse(data=result)
+    }))
 
 # -----------------------------
 
@@ -64,17 +68,28 @@ async def echo(websocket, path):
             break
 # ---------------------------------------------------------
 
-asyncio.get_event_loop().run_until_complete(
-    websockets.serve(echo, '127.0.0.1', 5678)
-)
-asyncio.get_event_loop().run_forever()
+# asyncio.get_event_loop().run_until_complete(
+#     websockets.serve(echo, '127.0.0.1', 5678)
+# )
+# asyncio.get_event_loop().run_forever()
+
 
 # --------------------------------------------------------
 
+async def main():
+    async with websockets.serve(echo, "127.0.0.1", 5678):
+        await asyncio.Future()  # run forever
 
-# async def main():
-#     async with websockets.serve(echo, "127.0.0.1", 5678):
-#         await asyncio.Future()  # run forever
 
-# if __name__ == "service.views":
-#     asyncio.run(main())
+def abc():
+    asyncio.run(main())
+
+
+if __name__ == "service.views":
+    # asyncio.run(main())
+
+    # course = threading.Thread(target=abc)
+    # course.start()
+
+    course = Process(target=abc)
+    course.start()
