@@ -92,7 +92,7 @@ def update():
 
     t = time.localtime().tm_hour + time.localtime().tm_min / 100
     if (t > 9.10 and t < 15.5) or not result:
-        result = {}
+        result = {'data': {'f43': '-', 'f170': '-'}}
         try:
             result = requests.get(
                 'http://push2.eastmoney.com/api/qt/stock/get?ut=bd1d9ddb04089700cf9c27f6f7426281&invt=2&fltt=2&fields=f43,f170&secid=%s&_=%s' % (secid, time.time())).json()
