@@ -1,4 +1,4 @@
-('D:\\project\\leek\\py_exe\\build\\leek\\PYZ-00.pyz',
+('D:\\project\\python_demo\\py_exe\\build\\leek\\PYZ-00.pyz',
  [('os', 'D:\\Program Files (x86)\\Python\\lib\\os.py', 'PYMODULE'),
   ('subprocess',
    'D:\\Program Files (x86)\\Python\\lib\\subprocess.py',
